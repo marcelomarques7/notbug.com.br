@@ -22,6 +22,21 @@ Route::get('/','HomeController');
 //});
 Route::view('/teste', 'teste');
 
+Route::get('login', function() {
+    echo 'PÁGINA DE LOGIN';
+})->name('login');
+
+Route::resource('todo', 'TodoController');
+/*
+GET - /TODO - index - todo.index - LISTA OS ITENS
+GET - /todo/create - create - todo.create - FORM DE CRIAÇÃO
+POST - /todo - store - todo.store - RECEBER OS DADOS E ADD ITEM
+GET - /todo/{id} - show - todo.show - ITEM INDIVIDUAL
+GET - /todo/{id}/edit - edit - todo.edit - FORM DE EDIÇÃO
+PUT - /todo/{id} - update - todo.update - RECEBER OS DADOS E UPDATE ITEM
+DELETE - /todo/{id} - destroy - todo.destroy - DELETAR O ITEM
+*/
+
 Route::prefix('/tarefas')->group(function(){
 
     Route::get('/', 'TarefasController@list')->name('tarefas.list');    //LISTAGEM DE TAREFAS
@@ -63,7 +78,7 @@ Route::get('/user/{id}', function($id){
 //AGRUPAR GRUPOS DE ROTAS
 Route::prefix('/config')->group(function(){
 
-    Route::get('/', 'Admin\ConfigController@index'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
+    Route::get('/', 'Admin\ConfigController@index')->middleware('auth'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
     Route::post('/', 'Admin\ConfigController@index');
 
     Route::get('info', 'Admin\ConfigController@info');
