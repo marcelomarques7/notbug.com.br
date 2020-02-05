@@ -22,9 +22,13 @@ Route::get('/','HomeController');
 //});
 Route::view('/teste', 'teste');
 
-Route::get('login', function() {
-    echo 'PÁGINA DE LOGIN';
-})->name('login');
+Route::get('login', 'Auth\LoginController@index')->name('login');
+Route::post('/login', 'Auth\LoginController@authenticate');
+
+Route::get('/register','Auth\RegisterController@index')->name('register');
+Route::post('/register','Auth\RegisterController@register');
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('todo', 'TodoController');
 /*
@@ -78,7 +82,7 @@ Route::get('/user/{id}', function($id){
 //AGRUPAR GRUPOS DE ROTAS
 Route::prefix('/config')->group(function(){
 
-    Route::get('/', 'Admin\ConfigController@index')->middleware('auth'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
+    Route::get('/', 'Admin\ConfigController@index')->name('config.index')->middleware('auth'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
     Route::post('/', 'Admin\ConfigController@index');
 
     Route::get('info', 'Admin\ConfigController@info');

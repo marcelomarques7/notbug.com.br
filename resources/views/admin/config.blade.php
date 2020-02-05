@@ -6,6 +6,8 @@
 
     <h1>Configurações...</h1>
 
+    <a href="logout">Sair</a>    
+
  
 
     @alert
