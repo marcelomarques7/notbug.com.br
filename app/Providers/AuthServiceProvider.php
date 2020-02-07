@@ -25,6 +25,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('see-form', function($user){
+
+        // MESMA COISA QUE ABAIXO COMENTADO, POREM BEM MELHOR
+        return $user->admin === 1 ? true : false;
+
+                //if($user->admin === 1){
+                /*    return true;
+                } else {
+                    return false;
+                }*/
+                
+        });
+
     }
 }

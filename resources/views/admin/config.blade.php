@@ -6,7 +6,7 @@
 
     <h1>Configurações...</h1>
 
-    <a href="logout">Sair</a>    
+    Olá, {{ $nome }} - <a href="logout">Sair</a>    
 
  
 
@@ -51,20 +51,22 @@
         Não existe uma cidade.
     @endempty
 
-    <form method="POST">
+    @if($showform)
+        <form method="POST">
 
-        @csrf
+            @csrf
 
-        Nome:<br/>
-        <input type="text" name="nome" /><br/>
+            Nome:<br/>
+            <input type="text" name="nome" /><br/>
 
-        Idade:<br/>
-        <input type="text" name="idade" /><br/>
+            Idade:<br/>
+            <input type="text" name="idade" /><br/>
 
-        Cidade:<br/>
-        <input type="text" name="cidade" /><br/>
+            Cidade:<br/>
+            <input type="text" name="cidade" /><br/>
 
-        <input type="submit" value="Enviar" /><br/>
+            <input type="submit" value="Enviar" /><br/>
 
-    </form>
+        </form>
+    @endif
 @endsection

@@ -41,16 +41,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function index(){
-        return view('login');
+    public function index(Request $request){
+        $tries = $request->session()->get('login_tries', 0);
+
+        //EXEMPLO PARA PEGAR FRASE DO TRADUTOR NO CONTROLER
+        //$frase = __('messages.test');
+        //echo "FRASE: ".$frase;
+
+        return view('login',[
+            'tries' => $tries
+        ]);
     }
 
     public function authenticate(Request $request){
         $creds = $request->only(['email', 'password']);
 
+        //DESTROIR SESSION
+        //$request->session()->forget('login_tries');
+
         if(Auth::attempt($creds)){
-            return redirect()->route('config.index');
+            $request->session()->put('login_tries', 0);
+            return redirect()->route('config.index');            
         } else {
+            $tries = intval($request->session()->get('login_tries', 0));
+            //$tries++; /*MELHOR COMO ESTA ABAIXO, ECONOMIZA CODIGO*/
+            $request->session()->put('login_tries', ++$tries);
+
             return redirect()->route('login')
             ->with('warning', 'E-mail e/ou senha inválidos');
         }

@@ -82,7 +82,7 @@ Route::get('/user/{id}', function($id){
 //AGRUPAR GRUPOS DE ROTAS
 Route::prefix('/config')->group(function(){
 
-    Route::get('/', 'Admin\ConfigController@index')->name('config.index')->middleware('auth'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
+    Route::get('/', 'Admin\ConfigController@index')->name('config.index'); //CAMINHO CORRETO DO CONTROLLER NA PASTA ADMIN
     Route::post('/', 'Admin\ConfigController@index');
 
     Route::get('info', 'Admin\ConfigController@info');
