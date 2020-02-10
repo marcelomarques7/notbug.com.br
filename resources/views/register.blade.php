@@ -3,7 +3,7 @@
 @section('title', 'Cadastro')
 
 @section('content')
-    teste
+
     @if($errors->any())
         @alert
             <ul>
